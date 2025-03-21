@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ProjectGrid from '@/components/ProjectGrid';
 import Services from '@/components/Services';
+import Teams from '@/components/Teams';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -38,10 +39,11 @@ const Index = () => {
       
       {/* Page content */}
       <Navbar />
-      <main>
+      <main className="space-y-8 md:space-y-12">
         <Hero />
         <ProjectGrid />
         <Services />
+        <Teams />
         <Contact />
       </main>
       <Footer />

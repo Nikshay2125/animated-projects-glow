@@ -23,11 +23,23 @@ const Navbar = () => {
     setIsMenuOpen(false);
   }, [location]);
 
+  const scrollToSection = (id: string) => {
+    setIsMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -80; // Adjust this value to account for fixed header
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   const menuItems = [
     { title: 'Home', path: '/' },
-    { title: 'Projects', path: '/#projects' },
-    { title: 'Services', path: '/#services' },
-    { title: 'Contact', path: '/#contact' },
+    { title: 'Projects', path: '#projects' },
+    { title: 'Services', path: '#services' },
+    { title: 'Team', path: '#team' },
+    { title: 'Contact', path: '#contact' },
+    { title: 'Team Details', path: '/team' },
   ];
 
   return (
@@ -47,20 +59,30 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8">
           {menuItems.map((item) => (
-            <Link 
-              key={item.title}
-              to={item.path}
-              className="nav-item"
-            >
-              {item.title}
-            </Link>
+            item.path.startsWith('#') ? (
+              <button 
+                key={item.title}
+                onClick={() => scrollToSection(item.path.substring(1))}
+                className="nav-item"
+              >
+                {item.title}
+              </button>
+            ) : (
+              <Link 
+                key={item.title}
+                to={item.path}
+                className="nav-item"
+              >
+                {item.title}
+              </Link>
+            )
           ))}
-          <Link 
-            to="/#contact" 
+          <button 
+            onClick={() => scrollToSection('contact')}
             className="px-4 py-2 rounded-md button-gradient text-white font-medium shadow-sm hover:shadow-md transition-all"
           >
             Get Started
-          </Link>
+          </button>
         </nav>
         
         {/* Mobile Menu Toggle */}
@@ -82,22 +104,31 @@ const Navbar = () => {
       >
         <nav className="flex flex-col space-y-6">
           {menuItems.map((item) => (
-            <Link 
-              key={item.title}
-              to={item.path}
-              className="text-lg font-medium py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.title}
-            </Link>
+            item.path.startsWith('#') ? (
+              <button 
+                key={item.title}
+                onClick={() => scrollToSection(item.path.substring(1))}
+                className="text-lg font-medium py-2"
+              >
+                {item.title}
+              </button>
+            ) : (
+              <Link 
+                key={item.title}
+                to={item.path}
+                className="text-lg font-medium py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.title}
+              </Link>
+            )
           ))}
-          <Link 
-            to="/#contact" 
+          <button 
+            onClick={() => scrollToSection('contact')}
             className="w-full py-3 rounded-md button-gradient text-white font-medium text-center shadow-sm"
-            onClick={() => setIsMenuOpen(false)}
           >
             Get Started
-          </Link>
+          </button>
         </nav>
       </div>
     </header>
