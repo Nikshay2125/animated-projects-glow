@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <Link to="/" className="inline-block mb-4">
               <span className="text-xl font-bold tracking-tight">
-                Code<span className="text-blue-400">Craft</span>
+                Nik<span className="text-blue-400">shay</span>
               </span>
             </Link>
             <p className="text-white/70 mb-6 max-w-md">
@@ -115,7 +115,7 @@ const Footer = () => {
         
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/70 mb-4 md:mb-0">
-            © {currentYear} CodeCraft. All rights reserved.
+            © {currentYear} Nikshay. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link to="/" className="text-white/70 hover:text-white transition-colors text-sm">
