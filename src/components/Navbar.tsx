@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -8,6 +8,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === '/';
   
   useEffect(() => {
     const handleScroll = () => {
@@ -23,8 +25,25 @@ const Navbar = () => {
     setIsMenuOpen(false);
   }, [location]);
 
-  const scrollToSection = (id: string) => {
+  const handleNavigation = (path: string) => {
     setIsMenuOpen(false);
+    
+    if (path.startsWith('#')) {
+      const sectionId = path.substring(1);
+      if (isHomePage) {
+        // If we're on the home page, just scroll to the section
+        scrollToSection(sectionId);
+      } else {
+        // If we're on another page, navigate to home and then scroll to section
+        navigate('/', { state: { scrollTo: sectionId } });
+      }
+    } else {
+      // Regular navigation to other pages
+      navigate(path);
+    }
+  };
+
+  const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       const yOffset = -80; // Adjust this value to account for fixed header
@@ -32,6 +51,20 @@ const Navbar = () => {
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
+
+  // Check for scrollTo instruction when landing on home page
+  useEffect(() => {
+    if (isHomePage && location.state && location.state.scrollTo) {
+      const sectionId = location.state.scrollTo;
+      // Small timeout to ensure the page has loaded
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 100);
+      
+      // Clean up the state to prevent scrolling on subsequent renders
+      navigate('/', { replace: true, state: {} });
+    }
+  }, [isHomePage, location.state, navigate]);
 
   const menuItems = [
     { title: 'Home', path: '/' },
@@ -59,26 +92,16 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8">
           {menuItems.map((item) => (
-            item.path.startsWith('#') ? (
-              <button 
-                key={item.title}
-                onClick={() => scrollToSection(item.path.substring(1))}
-                className="nav-item"
-              >
-                {item.title}
-              </button>
-            ) : (
-              <Link 
-                key={item.title}
-                to={item.path}
-                className="nav-item"
-              >
-                {item.title}
-              </Link>
-            )
+            <button 
+              key={item.title}
+              onClick={() => handleNavigation(item.path)}
+              className="nav-item"
+            >
+              {item.title}
+            </button>
           ))}
           <button 
-            onClick={() => scrollToSection('contact')}
+            onClick={() => handleNavigation('#contact')}
             className="px-4 py-2 rounded-md button-gradient text-white font-medium shadow-sm hover:shadow-md transition-all"
           >
             Get Started
@@ -104,27 +127,16 @@ const Navbar = () => {
       >
         <nav className="flex flex-col space-y-6">
           {menuItems.map((item) => (
-            item.path.startsWith('#') ? (
-              <button 
-                key={item.title}
-                onClick={() => scrollToSection(item.path.substring(1))}
-                className="text-lg font-medium py-2"
-              >
-                {item.title}
-              </button>
-            ) : (
-              <Link 
-                key={item.title}
-                to={item.path}
-                className="text-lg font-medium py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.title}
-              </Link>
-            )
+            <button 
+              key={item.title}
+              onClick={() => handleNavigation(item.path)}
+              className="text-lg font-medium py-2"
+            >
+              {item.title}
+            </button>
           ))}
           <button 
-            onClick={() => scrollToSection('contact')}
+            onClick={() => handleNavigation('#contact')}
             className="w-full py-3 rounded-md button-gradient text-white font-medium text-center shadow-sm"
           >
             Get Started
