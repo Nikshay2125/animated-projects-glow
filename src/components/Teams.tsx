@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Users } from 'lucide-react';
@@ -17,16 +16,9 @@ const teamMembers = [
   {
     id: 2,
     name: 'Sarah Williams',
-    role: 'Lead Designer',
+    role: 'Co-founder & CTO',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1287&auto=format&fit=crop',
-    bio: 'UI/UX specialist creating beautiful and intuitive designs.'
-  },
-  {
-    id: 3,
-    name: 'Michael Chen',
-    role: 'Senior Developer',
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1287&auto=format&fit=crop',
-    bio: 'Coding wizard with expertise in React, Node.js, and cloud architecture.'
+    bio: 'UI/UX specialist creating beautiful and intuitive designs with deep technical expertise.'
   }
 ];
 
@@ -82,36 +74,19 @@ const Teams = () => {
               <p className="text-sm font-medium text-primary">Our Team</p>
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Meet Our <span className="text-gradient">Expert Team</span>
+              Meet Our <span className="text-gradient">Founders</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our talented team of professionals is dedicated to bringing your vision to life
-              through innovative solutions and exceptional service.
+              Our visionary co-founders have combined their expertise to create Nikshay,
+              bringing together years of industry experience and technical knowledge.
             </p>
           </motion.div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {teamMembers.map((member, index) => (
             <TeamMember key={member.id} member={member} index={index} />
           ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <Link 
-              to="/team" 
-              className="inline-flex items-center px-6 py-3 rounded-md button-gradient text-white font-medium shadow-md hover:shadow-lg transition-all gap-2"
-            >
-              View All Team Members
-              <ArrowRight size={18} />
-            </Link>
-          </motion.div>
         </div>
       </Container>
     </section>

@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Mail, Linkedin, Twitter, Github } from 'lucide-react';
@@ -29,29 +28,13 @@ const teamData = [
   {
     id: 2,
     name: 'Sarah Williams',
-    role: 'Lead Designer',
+    role: 'Co-founder & CTO',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1287&auto=format&fit=crop',
-    bio: 'Sarah brings creativity and user-centered thinking to every project. With a background in psychology and design, she creates beautiful, intuitive interfaces that drive engagement and delight users while meeting business objectives.',
-    skills: ['UI/UX Design', 'User Research', 'Design Systems', 'Brand Identity', 'Prototyping'],
+    bio: 'Sarah brings creativity, user-centered thinking, and technical expertise to every project. With a background in computer science and design, she leads our technical strategy while creating beautiful, intuitive interfaces that drive engagement and delight users.',
+    skills: ['Technical Architecture', 'UI/UX Design', 'Full-Stack Development', 'AI & Machine Learning', 'Cloud Infrastructure'],
     projects: ['E-commerce Redesign', 'Mobile Banking App', 'SaaS Dashboard'],
-    education: 'BFA in Interactive Design, Rhode Island School of Design',
+    education: 'MS in Computer Science, Stanford University',
     email: 'sarah@nikshay.com',
-    social: {
-      linkedin: '#',
-      twitter: '#',
-      github: '#'
-    }
-  },
-  {
-    id: 3,
-    name: 'Michael Chen',
-    role: 'Senior Developer',
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1287&auto=format&fit=crop',
-    bio: 'Michael is our technical backbone, with deep expertise in full-stack development. He architects scalable solutions and mentors our development team to ensure code quality and performance across all projects.',
-    skills: ['React', 'Node.js', 'AWS', 'TypeScript', 'DevOps', 'System Architecture'],
-    projects: ['Real-time Analytics Dashboard', 'AI-powered Recommendation Engine', 'Scalable Microservices Platform'],
-    education: 'MS in Computer Science, MIT',
-    email: 'michael@nikshay.com',
     social: {
       linkedin: '#',
       twitter: '#',
@@ -87,11 +70,11 @@ const TeamDetails = () => {
               className="text-center max-w-3xl mx-auto mb-12"
             >
               <h1 className="text-3xl md:text-5xl font-bold mb-6">
-                Our <span className="text-gradient">Talented Team</span>
+                Our <span className="text-gradient">Founders</span>
               </h1>
               <p className="text-lg text-muted-foreground">
-                Meet the innovative minds behind Nikshay's success. Our diverse team combines technical expertise, 
-                creative talent, and industry experience to deliver exceptional digital solutions.
+                Meet the visionary founders behind Nikshay's success. Our co-founders combine technical expertise, 
+                creative talent, and industry experience to lead our company to excellence.
               </p>
             </motion.div>
           </div>
